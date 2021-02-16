@@ -1,10 +1,18 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import App from './App';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-describe('App', () => {
-  it('should render a <div />', () => {
-    const container = shallow(<App />);
-    expect(container.find('div').length).toEqual(1);
+import App from './App';
+import Timer from './components/timer/Timer';
+
+configure({ adapter: new Adapter() });
+
+describe("Counter Testing", () => {
+  let wrapper: any;
+  beforeEach(() => {
+    wrapper = shallow(<Timer />);
   });
-});
+  test("render the title of counter", () => {
+    expect(wrapper.find("div").length).toBeGreaterThanOrEqual(1);
+  });
+})
